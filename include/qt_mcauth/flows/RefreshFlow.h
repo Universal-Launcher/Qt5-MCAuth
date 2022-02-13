@@ -7,6 +7,6 @@ class QT_MCAUTH_EXPORT RefreshFlow : public Flow {
   Q_OBJECT
 
 public:
-  RefreshFlow() : Flow() {}
-  virtual ~RefreshFlow() {}
+  RefreshFlow(MCAuthData *data);
+  virtual ~RefreshFlow();
 };

@@ -7,25 +7,16 @@ target("qt-mcauth")
     add_rules("qt.shared")
 
     add_files("src/**.cpp")
+    add_files("include/**.h")
     add_includedirs("include", { public = true })
 
-    add_frameworks("QtNetwork", "QtNetworkAuth", { public = true })
+    add_frameworks("QtGui", "QtNetwork", "QtNetworkAuth", { public = true })
+    add_cxflags("-fPIC", { force = true })
     add_defines("QT_MCAUTH_LIBRARY")
 
-target("qt-mcauth_static")
-    add_rules("qt.static")
-
-    add_files("src/**.cpp")
-    add_includedirs("include", { public = true })
-
-    add_frameworks("QtNetwork", "QtNetworkAuth", { public = true })
-    add_defines("QT_MCAUTH_LIBRARY_STATIC")
-
 target("test")
-    add_rules("qt.console")
+    add_rules("qt.widgetapp")
 
     add_files("test/**.cpp")
-    --add_deps("qt-mcauth_static")
-    add_files("src/**.cpp")
+    add_deps("qt-mcauth")
     add_includedirs("include")
-    add_frameworks("QtNetwork", "QtNetworkAuth", { public = true })

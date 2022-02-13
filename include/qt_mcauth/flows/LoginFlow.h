@@ -7,6 +7,6 @@
 class QT_MCAUTH_EXPORT LoginFlow : public Flow {
   Q_OBJECT
 public:
-  LoginFlow() : Flow() {}
-  virtual ~LoginFlow() {}
+  LoginFlow(MCAuthData *data);
+  ~LoginFlow();
 };

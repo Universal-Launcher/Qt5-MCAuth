@@ -4,7 +4,9 @@
 #include <QObject>
 #include <memory>
 
+#include <qt_mcauth/auth_data.h>
 #include <qt_mcauth/globals.h>
+#include <qt_mcauth/steps/Step.h>
 
 enum class QT_MCAUTH_EXPORT FlowState { Succeed, Failed, Stopped, Working };
 
@@ -12,19 +14,26 @@ class QT_MCAUTH_EXPORT Flow : public QObject {
   Q_OBJECT
 
 public:
-  Flow() : QObject() {}
-  virtual ~Flow() {}
+  Flow(MCAuthData *data);
+  virtual ~Flow();
   virtual void execute();
   virtual void stop();
+
+private:
+  bool changeStep(const StepState &state, const QString &message);
 
 signals:
   void message(const FlowState &state, const QString &message);
   void finished(const FlowState &state);
 
+private slots:
+  void stepFinished(const StepState &state, const QString &message);
+
 protected:
   void nextStep();
   void succeed();
 
-  QList<std::shared_ptr<QObject>> m_steps;
-  std::shared_ptr<QObject *> m_currentStep;
+  QList<std::shared_ptr<Step>> m_steps;
+  std::shared_ptr<Step> m_currentStep;
+  MCAuthData *m_data;
 };
