@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
     if (state == FlowState::Succeed) {
       std::cout << "Show user username" << std::endl;
 
-      auto account = mcAuth->getAccount();
+      /*auto account = mcAuth->getAccount();
       std::cout << "Username: " << account->username().toStdString()
-                << std::endl;
+                << std::endl;*/
     } else {
     }
   });

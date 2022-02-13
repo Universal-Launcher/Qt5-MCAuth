@@ -33,8 +33,13 @@ OpenBrowserStep::OpenBrowserStep(MCAuthData *data) : Step(data) {
   connect(m_oauth2.get(), &QOAuth2AuthorizationCodeFlow::statusChanged,
           [=](QAbstractOAuth::Status status) {
             if (status == QAbstractOAuth::Status::Granted) {
-              emit finished(StepState::Succeed, "cucu");
-            } else {
+              m_data->accessToken = m_oauth2->token();
+              m_data->refreshToken = m_oauth2->refreshToken();
+              emit finished(StepState::Succeed,
+                            tr("Microsoft account authenticated."));
+            } else if (status == QAbstractOAuth::Status::NotAuthenticated) {
+              emit finished(StepState::Stopped,
+                            tr("Microsoft account authentication denied."));
             }
           });
 }
