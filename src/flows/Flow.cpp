@@ -1,3 +1,9 @@
 #include "qt_mcauth/flows/Flow.h"
 
-namespace QtMCAuth {}
+void Flow::execute() {}
+
+void Flow::stop() {}
+
+void Flow::nextStep() {}
+
+void Flow::succeed() {}

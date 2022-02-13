@@ -1,9 +1,12 @@
 #pragma once
 
-#include "Flow.h"
+#include <qt_mcauth/flows/Flow.h>
 
-namespace QtMCAuth {
+#include <qt_mcauth/globals.h>
 
-class LoginFlow : public Flow {};
-
-}; // namespace QtMCAuth
+class QT_MCAUTH_EXPORT LoginFlow : public Flow {
+  Q_OBJECT
+public:
+  LoginFlow() : Flow() {}
+  virtual ~LoginFlow() {}
+};

@@ -1,8 +1,12 @@
 #pragma once
 
 #include "Flow.h"
+#include <qt_mcauth/globals.h>
 
-namespace QtMCAuth {
+class QT_MCAUTH_EXPORT RefreshFlow : public Flow {
+  Q_OBJECT
 
-class RefreshFlow : public Flow {};
-} // namespace QtMCAuth
+public:
+  RefreshFlow() : Flow() {}
+  virtual ~RefreshFlow() {}
+};

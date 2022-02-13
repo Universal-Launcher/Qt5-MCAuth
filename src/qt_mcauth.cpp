@@ -1,19 +1,17 @@
 #include "qt_mcauth/qt_mcauth.h"
 
-namespace QtMCAuth {
+#include <QDebug>
 
-QtMCAuth::QtMCAuth(const QString &clientID) {}
+MCAuth::MCAuth(const QString &clientID) : QObject() {
+  qDebug() << "Client ID: " << clientID;
+}
 
-QtMCAuth::~QtMCAuth() {}
-
-LoginFlow *QtMCAuth::loginAccount() {
-  auto flow = new LoginFlow();
+Flow *MCAuth::loginAccount() {
+  auto flow = new Flow();
   return flow;
 }
 
-RefreshFlow *QtMCAuth::refreshAccount() {
-  auto flow = new RefreshFlow();
+Flow *MCAuth::refreshAccount() {
+  auto flow = new Flow();
   return flow;
 }
-
-} // namespace QtMCAuth

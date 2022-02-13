@@ -4,16 +4,18 @@
 #include <QObject>
 #include <memory>
 
-namespace QtMCAuth {
-enum class FlowState { Succeed, Failed, Stopped, Working };
+#include <qt_mcauth/globals.h>
 
-class Flow : public QObject {
+enum class QT_MCAUTH_EXPORT FlowState { Succeed, Failed, Stopped, Working };
+
+class QT_MCAUTH_EXPORT Flow : public QObject {
   Q_OBJECT
 
 public:
-  void execute();
-  void stop();
-  QObject *getAccount();
+  Flow() : QObject() {}
+  virtual ~Flow() {}
+  virtual void execute();
+  virtual void stop();
 
 signals:
   void message(const FlowState &state, const QString &message);
@@ -26,5 +28,3 @@ protected:
   QList<std::shared_ptr<QObject>> m_steps;
   std::shared_ptr<QObject *> m_currentStep;
 };
-
-} // namespace QtMCAuth

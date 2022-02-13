@@ -1,26 +1,23 @@
 #pragma once
 
-#include "MCAccount.h"
-#include "flows/LoginFlow.h"
-#include "flows/RefreshFlow.h"
 #include <QObject>
+#include <qt_mcauth/MCAccount.h>
+#include <qt_mcauth/flows/LoginFlow.h>
+#include <qt_mcauth/flows/RefreshFlow.h>
+#include <qt_mcauth/globals.h>
 
-namespace QtMCAuth {
-
-class QtMCAuth : public QObject {
+class QT_MCAUTH_EXPORT MCAuth : public QObject {
   Q_OBJECT
 
 public:
-  QtMCAuth(const QString &clientID);
-  ~QtMCAuth();
+  MCAuth(const QString &clientID);
+  virtual ~MCAuth() {}
 
-  LoginFlow *loginAccount();
-  RefreshFlow *refreshAccount();
+  Flow *loginAccount();
+  Flow *refreshAccount();
 
   MCAccount *getAccount() { return nullptr; }
 
 private:
   QString m_clientID;
 };
-
-} // namespace QtMCAuth
