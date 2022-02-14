@@ -20,6 +20,9 @@ public:
 
   std::optional<MCAccount> &getAccount() { return m_data->mcAccount; }
 
+  QString getAccessToken() const { return m_data->accessToken; }
+  QString getRefreshToken() const { return m_data->refreshToken; }
+
 private:
   QString m_clientID;
   std::unique_ptr<MCAuthData> m_data;
