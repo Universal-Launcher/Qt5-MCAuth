@@ -1,5 +1,7 @@
 #include <qt_mcauth/steps/GetMinecraftProfile.h>
 
+#include <optional>
+
 GetMinecraftProfileStep::GetMinecraftProfileStep(MCAuthData *data)
     : Step(data) {}
 
@@ -40,6 +42,8 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
   m_data->mcAccount->id = doc["id"].toString();
   m_data->mcAccount->username = doc["name"].toString();
 
+  MinecraftSkin *current = nullptr;
+
   for (const QJsonValue &value : doc["skins"].toArray()) {
     MinecraftSkin skin{};
     skin.id = value["id"].toString();
@@ -47,6 +51,11 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
     skin.url = value["url"].toString();
     skin.variant = value["variant"].toString();
     skin.alias = value["alias"].toString();
+
+    if (skin.state == "ACTIVE") {
+      current = &skin;
+    }
+
     m_data->mcAccount->skins.append(skin);
   }
 
@@ -57,5 +66,18 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
     cape.url = value["url"].toString();
     cape.alias = value["alias"].toString();
     m_data->mcAccount->capes.append(cape);
+  }
+
+  if (current) {
+    emit finished(StepState::Working, tr("Fetching player skin"));
+    auto reply = m_data->nam->get(QNetworkRequest{current->url});
+
+    while (!reply->isFinished()) {
+      qApp->processEvents();
+    }
+
+    m_data->mcAccount->currentSkin->loadFromData(reply->readAll());
+
+    reply->deleteLater();
   }
 }

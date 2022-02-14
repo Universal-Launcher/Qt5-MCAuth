@@ -13,7 +13,10 @@ LoginFlow *MCAuth::loginAccount() {
   return flow;
 }
 
-RefreshFlow *MCAuth::refreshAccount() {
+RefreshFlow *MCAuth::refreshAccount(const QString &accessToken,
+                                    const QString &refreshToken) {
+  m_data->accessToken = accessToken;
+  m_data->refreshToken = refreshToken;
   auto flow = new RefreshFlow(m_data.get());
   return flow;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QPixmap>
 #include <QString>
 #include <QUrl>
 #include <QVector>
@@ -25,4 +26,5 @@ struct MCAccount {
   QString accessToken;
   QVector<MinecraftSkin> skins;
   QVector<MinecraftCapes> capes;
+  std::optional<QPixmap> currentSkin;
 };

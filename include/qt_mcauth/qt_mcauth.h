@@ -15,7 +15,8 @@ public:
   virtual ~MCAuth() {}
 
   LoginFlow *loginAccount();
-  RefreshFlow *refreshAccount();
+  RefreshFlow *refreshAccount(const QString &accessToken,
+                              const QString &refreshToken);
 
   std::optional<MCAccount> &getAccount() { return m_data->mcAccount; }
 
