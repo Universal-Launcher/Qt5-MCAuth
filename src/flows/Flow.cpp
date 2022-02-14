@@ -13,7 +13,11 @@ void Flow::execute() {
   nextStep();
 }
 
-void Flow::stop() {}
+void Flow::stop() {
+  m_currentStep.reset();
+  m_steps.clear();
+  emit finished(FlowState::Stopped);
+}
 
 void Flow::nextStep() {
   if (m_steps.size() == 0) {

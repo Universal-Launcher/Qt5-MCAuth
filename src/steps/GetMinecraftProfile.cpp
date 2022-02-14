@@ -69,7 +69,6 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
   }
 
   if (current) {
-    emit finished(StepState::Working, tr("Fetching player skin"));
     auto reply = m_data->nam->get(QNetworkRequest{current->url});
 
     while (!reply->isFinished()) {

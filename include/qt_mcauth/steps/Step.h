@@ -10,7 +10,7 @@ class QT_MCAUTH_EXPORT Step : public QObject {
   Q_OBJECT
 
 public:
-  Step(MCAuthData *data);
+  Step(MCAuthData *data) : QObject(), m_data{data} {}
   virtual ~Step() noexcept = default;
 
   virtual QString describe() const = 0;
