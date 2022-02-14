@@ -16,4 +16,5 @@ struct MCAuthData {
 
   QString xui_userHash;
   QString xblToken;
+  QString xstsToken;
 };
