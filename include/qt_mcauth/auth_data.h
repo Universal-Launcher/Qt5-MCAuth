@@ -3,6 +3,8 @@
 #include <QString>
 #include <QtNetwork>
 #include <memory>
+#include <optional>
+#include <qt_mcauth/MCAccount.h>
 
 struct MCAuthData {
   // App information
@@ -17,4 +19,8 @@ struct MCAuthData {
   QString xui_userHash;
   QString xblToken;
   QString xstsToken;
+
+  QString mcAccessToken;
+
+  std::optional<MCAccount> mcAccount;
 };

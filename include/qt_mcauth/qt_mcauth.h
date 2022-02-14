@@ -17,7 +17,7 @@ public:
   LoginFlow *loginAccount();
   RefreshFlow *refreshAccount();
 
-  MCAccount *getAccount() { return nullptr; }
+  std::optional<MCAccount> &getAccount() { return m_data->mcAccount; }
 
 private:
   QString m_clientID;

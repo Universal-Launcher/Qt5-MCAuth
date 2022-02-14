@@ -1,4 +1,4 @@
-#include <qt_mcauth/steps/OpenBrowserStep.h>
+#include <qt_mcauth/steps/OpenBrowser.h>
 
 #include <QtGui>
 
