@@ -13,12 +13,12 @@ QString GetMinecraftProfileStep::describe() const {
 
 void GetMinecraftProfileStep::execute() {
   QNetworkRequest http{
-      QUrl{"https://api.minecraftservices.com/authentication/login_with_xbox"}};
+      QUrl{"https://api.minecraftservices.com/minecraft/profile"}};
   http.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
   http.setRawHeader(QByteArray("Authorization"),
                     "Bearer " + m_data->mcAccessToken.toUtf8());
 
-  m_reply = std::unique_ptr<QNetworkReply>(m_data->nam->get(http));
+  m_reply = unique_qobject_ptr<QNetworkReply>(m_data->nam->get(http));
 
   connect(m_reply.get(), &QNetworkReply::finished, this,
           &GetMinecraftProfileStep::networkReplyFinished);

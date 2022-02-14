@@ -19,7 +19,7 @@ private slots:
   void networkReplyFinished();
 
 private:
-  std::unique_ptr<QNetworkReply> m_reply;
+  unique_qobject_ptr<QNetworkReply> m_reply;
 
   void populateMCAccount(const QJsonDocument &doc);
 };

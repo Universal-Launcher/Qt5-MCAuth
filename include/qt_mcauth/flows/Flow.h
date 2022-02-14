@@ -33,7 +33,7 @@ protected:
   void nextStep();
   void succeed();
 
-  QList<std::shared_ptr<Step>> m_steps;
-  std::shared_ptr<Step> m_currentStep;
+  QList<shared_qobject_ptr<Step>> m_steps;
+  shared_qobject_ptr<Step> m_currentStep;
   MCAuthData *m_data;
 };

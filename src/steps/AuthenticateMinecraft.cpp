@@ -21,7 +21,7 @@ void AuthenticateMinecraftStep::execute() {
   QJsonDocument doc{obj};
 
   m_reply =
-      std::unique_ptr<QNetworkReply>(m_data->nam->post(http, doc.toJson()));
+      unique_qobject_ptr<QNetworkReply>(m_data->nam->post(http, doc.toJson()));
 
   connect(m_reply.get(), &QNetworkReply::finished, this,
           &AuthenticateMinecraftStep::networkReplyFinished);

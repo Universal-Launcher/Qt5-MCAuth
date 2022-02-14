@@ -5,12 +5,13 @@
 #include <memory>
 #include <optional>
 #include <qt_mcauth/MCAccount.h>
+#include <qt_mcauth/globals.h>
 
 struct MCAuthData {
   // App information
   QString clientID;
   // Used for requests
-  std::unique_ptr<QNetworkAccessManager> nam;
+  unique_qobject_ptr<QNetworkAccessManager> nam;
 
   // Auth tokens
   QString accessToken;

@@ -23,9 +23,11 @@ int main(int argc, char *argv[]) {
     if (state == FlowState::Succeed) {
       std::cout << "Show user username" << std::endl;
 
-      /*auto account = mcAuth->getAccount();
-      std::cout << "Username: " << account->username().toStdString()
-                << std::endl;*/
+      auto account = mcAuth->getAccount();
+      if (account.has_value()) {
+        std::cout << "username: " << account->username.toStdString()
+                  << std::endl;
+      }
     } else {
     }
   });
@@ -39,6 +41,8 @@ int main(int argc, char *argv[]) {
                    });
 
   flow->execute();
+
+  flow->deleteLater();
 
   return app.exec();
 }

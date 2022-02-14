@@ -4,6 +4,7 @@
 #include <QString>
 #include <QUrl>
 #include <QVector>
+#include <optional>
 
 struct MCInfo {
   QString id;

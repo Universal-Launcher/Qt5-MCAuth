@@ -20,6 +20,6 @@ public slots:
   void execute();
 
 private:
-  std::unique_ptr<QOAuth2AuthorizationCodeFlow> m_oauth2;
-  std::unique_ptr<QOAuthHttpServerReplyHandler> m_reply_handler;
+  unique_qobject_ptr<QOAuth2AuthorizationCodeFlow> m_oauth2;
+  unique_qobject_ptr<QOAuthHttpServerReplyHandler> m_reply_handler;
 };

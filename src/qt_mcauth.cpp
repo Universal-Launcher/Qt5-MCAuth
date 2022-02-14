@@ -5,7 +5,8 @@
 MCAuth::MCAuth(const QString &clientID) : QObject(), m_clientID{clientID} {
   m_data = std::make_unique<MCAuthData>();
   m_data->clientID = clientID;
-  m_data->nam = std::make_unique<QNetworkAccessManager>();
+  m_data->nam =
+      unique_qobject_ptr<QNetworkAccessManager>(new QNetworkAccessManager());
 }
 
 LoginFlow *MCAuth::loginAccount() {

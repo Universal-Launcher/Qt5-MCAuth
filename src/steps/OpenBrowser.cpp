@@ -3,8 +3,10 @@
 #include <QtGui>
 
 OpenBrowserStep::OpenBrowserStep(MCAuthData *data) : Step(data) {
-  m_oauth2 = std::make_unique<QOAuth2AuthorizationCodeFlow>();
-  m_reply_handler = std::make_unique<QOAuthHttpServerReplyHandler>(25560, this);
+  m_oauth2 = unique_qobject_ptr<QOAuth2AuthorizationCodeFlow>(
+      new QOAuth2AuthorizationCodeFlow());
+  m_reply_handler = unique_qobject_ptr<QOAuthHttpServerReplyHandler>(
+      new QOAuthHttpServerReplyHandler(25560, this));
 
   m_oauth2->setClientIdentifier(data->clientID);
 

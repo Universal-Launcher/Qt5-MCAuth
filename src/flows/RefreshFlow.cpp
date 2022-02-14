@@ -6,10 +6,14 @@
 #include <qt_mcauth/steps/GetMinecraftProfile.h>
 
 RefreshFlow::RefreshFlow(MCAuthData *data) : Flow(data) {
-  m_steps.append(std::make_shared<AuthenticateXBoxStep>(data));
-  m_steps.append(std::make_shared<AuthenticateXSTSStep>(data));
-  m_steps.append(std::make_shared<AuthenticateMinecraftStep>(data));
-  m_steps.append(std::make_shared<GetMinecraftProfileStep>(data));
+  m_steps.append(
+      shared_qobject_ptr<AuthenticateXBoxStep>(new AuthenticateXBoxStep(data)));
+  m_steps.append(
+      shared_qobject_ptr<AuthenticateXSTSStep>(new AuthenticateXSTSStep(data)));
+  m_steps.append(shared_qobject_ptr<AuthenticateMinecraftStep>(
+      new AuthenticateMinecraftStep(data)));
+  m_steps.append(shared_qobject_ptr<GetMinecraftProfileStep>(
+      new GetMinecraftProfileStep(data)));
 }
 
 RefreshFlow::~RefreshFlow() {}
