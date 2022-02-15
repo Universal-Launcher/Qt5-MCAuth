@@ -42,7 +42,7 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
   m_data->mcAccount->id = doc["id"].toString();
   m_data->mcAccount->username = doc["name"].toString();
 
-  MinecraftSkin *current = nullptr;
+  std::optional<MinecraftSkin> current;
 
   for (const QJsonValue &value : doc["skins"].toArray()) {
     MinecraftSkin skin{};
@@ -53,7 +53,7 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
     skin.alias = value["alias"].toString();
 
     if (skin.state == "ACTIVE") {
-      current = &skin;
+      current = skin;
     }
 
     m_data->mcAccount->skins.append(skin);
@@ -68,14 +68,16 @@ void GetMinecraftProfileStep::populateMCAccount(const QJsonDocument &doc) {
     m_data->mcAccount->capes.append(cape);
   }
 
-  if (current) {
+  if (current.has_value()) {
     auto reply = m_data->nam->get(QNetworkRequest{current->url});
 
     while (!reply->isFinished()) {
       qApp->processEvents();
     }
 
-    m_data->mcAccount->currentSkin->loadFromData(reply->readAll());
+    QPixmap pm;
+    pm.loadFromData(reply->readAll());
+    m_data->mcAccount->currentSkin = pm;
 
     reply->deleteLater();
   }
