@@ -4,8 +4,11 @@
 #include <qt_mcauth/steps/AuthenticateXBox.h>
 #include <qt_mcauth/steps/AuthenticateXSTS.h>
 #include <qt_mcauth/steps/GetMinecraftProfile.h>
+#include <qt_mcauth/steps/RefreshMSToken.h>
 
 RefreshFlow::RefreshFlow(MCAuthData *data) : Flow(data) {
+  m_steps.append(
+      shared_qobject_ptr<RefreshMSTokenStep>(new RefreshMSTokenStep(data)));
   m_steps.append(
       shared_qobject_ptr<AuthenticateXBoxStep>(new AuthenticateXBoxStep(data)));
   m_steps.append(
